@@ -1,0 +1,32 @@
+name: update
+
+on:
+  schedule:
+    - cron: '30 16 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Get current time
+      uses: gerred/actions/current-time@master
+      id: current-time
+
+    - name: Update data
+      run: make
+
+    - name: Commit files
+      env:
+        TIME: "${{ steps.current-time.outputs.time }}"
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "chore(update): $TIME" -a
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
