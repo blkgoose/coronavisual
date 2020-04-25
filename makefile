@@ -9,9 +9,9 @@ clean:
 .data:
 	@git clone https://github.com/pcm-dpc/COVID-19.git $@
 
-dati/regioni.csv: .data/dati-regioni/*.csv
+dati/regioni.csv: .data
 	mkdir -p dati
-	cat $+ > $@.tmp
+	cat $+/dati-regioni/*.csv > $@.tmp
 	head -1 $@.tmp > $@.header
 	cat $@.header > $@.base
 	grep -vf $@.header $@.tmp >> $@.base
@@ -19,4 +19,4 @@ dati/regioni.csv: .data/dati-regioni/*.csv
 	awk -f regioni.awk $@.base $@.base > $@
 	rm -f $@.*
 
-default: clean .data dati/regioni.csv
+default: clean dati/regioni.csv
