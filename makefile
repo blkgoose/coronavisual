@@ -19,4 +19,16 @@ dati/regioni.csv: .data
 	awk -f regioni.awk $@.base $@.base > $@
 	rm -f $@.*
 
-default: clean dati/regioni.csv
+dati/province.csv: .data
+	mkdir -p dati
+	cat $+/dati-province/*.csv > $@
+
+dati/nazione.csv: .data
+	mkdir -p dati
+	cat $+/dati-andamento-nazionale/*.csv > $@
+
+default: \
+    clean \
+    dati/regioni.csv \
+    dati/nazione.csv \
+    dati/province.csv \
