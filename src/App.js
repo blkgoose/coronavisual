@@ -1,54 +1,60 @@
 import React, { Component } from 'react'
 import { LineChart, XAxis, YAxis, Legend, Tooltip, CartesianGrid, Line } from 'recharts'
 import Papa from 'papaparse'
+import Select from 'react-select'
 
-Array.prototype.distinct = function() {
-  return Array.from(new Set(this))
-}
+const distinct = (v) => Array.from(new Set(v))
 
 class Graph extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      data: null
+      data: null,
+      regione: "Lazio"
     }
-    this.regione = null
   }
 
   componentDidMount() {
-    Papa.parse('dati/regioni.csv', {
+    Papa.parse('coronavisual/dati/regioni.csv', {
       download: true,
       header: true,
-      complete: data => this.setState(data)
+      complete: data => this.setState({data: data})
     })
   }
 
+  options = () =>
+    this.state.data ?
+      distinct(
+        this.state.data.data
+        .map(r => r.denominazione_regione)
+      )
+      .map(v => new Object({value: v, label: v}))
+    : []
+
   render() {
-    const data = (regione) =>
+    const data = () =>
       this.state.data &&
-      this.state.data
-      .filter(r => r.denominazione_regione === regione)
+      this.state.data.data
+      .filter(r => r.denominazione_regione === this.state.regione)
       .filter(r => r.data >= '2020-05-01')
 
     return (
       <>
-        <select onChange={r => this.regione = r}>
-          {
-            this.state.data ?
-              this.state.data.map(r => r.denominazione_regione)
-                .distinct()
-                .map(e => <option key={e} value={e}>{e}</option>)
-            : null
-          }
-        </select>
+        <h2> {this.state.regione} </h2>
+
+        <Select
+          options={this.options()}
+          value={this.state.regione}
+          onChange={s => this.setState({regione: s.value})}
+        />
+
         <LineChart
           width={1000}
           height={500}
           data={data(this.state.regione)}
           margin={{top: 5, right: 30, left: 20, bottom: 5}}
         >
-
           <XAxis dataKey="data"/>
           <YAxis type='number' domain={[0, 250]}/>
 
