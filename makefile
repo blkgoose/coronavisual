@@ -42,3 +42,5 @@ default: \
     public/dati/regioni.csv \
     public/dati/nazione.csv \
     public/dati/province.csv \
+#
+	cp -r public/dati/ docs/
