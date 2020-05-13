@@ -29,6 +29,10 @@ public/dati/nazione.csv: .data
 	cat $+/dati-andamento-nazionale/*.csv > $@
 	sed -i 's/\r//g' $@
 
+build/index.html:
+	cd src
+	npm run-script build
+
 default: \
     clean \
     public/dati/regioni.csv \
