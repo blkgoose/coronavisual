@@ -27,15 +27,20 @@ class Graph extends Component {
     this.state.data ?
       distinct(
         this.state.data.data
+        .filter(r => r.data !== '')
         .map(r => r.denominazione_regione)
       )
-      .map(v => new Object({value: v, label: v}))
+      .map(v => { return {value: v, label: v} })
     : []
 
   render() {
     const data = () =>
       this.state.data &&
       this.state.data.data
+      .map(r => {
+        r.data = r.data.substring(0, 10)
+        return r
+      })
       .filter(r => r.denominazione_regione === this.state.regione)
       .filter(r => r.data >= '2020-05-01')
 
@@ -56,7 +61,7 @@ class Graph extends Component {
           margin={{top: 5, right: 30, left: 20, bottom: 5}}
         >
           <XAxis dataKey="data"/>
-          <YAxis type='number' domain={[0, 250]}/>
+          <YAxis type='number' domain={[0, dataMax => dataMax * 8]}/>
 
           <CartesianGrid />
 
