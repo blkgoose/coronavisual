@@ -35,6 +35,7 @@ docs/index.html:
 	cd src
 	npm run-script build
 	mv build/* docs
+	rmdir build
 
 default: \
     clean \
