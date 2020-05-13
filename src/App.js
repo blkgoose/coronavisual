@@ -16,7 +16,7 @@ class Graph extends Component {
   }
 
   componentDidMount() {
-    Papa.parse('coronavisual/dati/regioni.csv', {
+    Papa.parse('dati/regioni.csv', {
       download: true,
       header: true,
       complete: data => this.setState({data: data})
