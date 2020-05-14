@@ -6,12 +6,12 @@ clean:
 	@rm -rf .data
 	@rm -rf dati
 
-.data:
-	@git clone https://github.com/pcm-dpc/COVID-19.git $@
+.data/%:
+	@git clone https://github.com/pcm-dpc/COVID-19.git .data
 
-public/dati/regioni.csv: .data
-	mkdir -p dati
-	cat $+/dati-regioni/*.csv > $@.tmp
+docs/dati/regioni.csv: .data/dati-regioni/dpc-covid19-ita-regioni.csv
+	mkdir -p $(dir $@)
+	cat $+ > $@.tmp
 	head -1 $@.tmp > $@.header
 	cat $@.header > $@.base
 	grep -vf $@.header $@.tmp >> $@.base
@@ -19,14 +19,14 @@ public/dati/regioni.csv: .data
 	awk -f regioni.awk $@.base $@.base > $@
 	rm -f $@.*
 
-public/dati/province.csv: .data
-	mkdir -p dati
-	cat $+/dati-province/*.csv > $@
+docs/dati/province.csv: .data/dati-province/dpc-covid19-ita-province.csv
+	mkdir -p $(dir $@)
+	cat $+ > $@
 	sed -i 's/\r//g' $@
 
-public/dati/nazione.csv: .data
-	mkdir -p dati
-	cat $+/dati-andamento-nazionale/*.csv > $@
+public/dati/nazione.csv: .data/dati-andamento-nazionale/dpc-covid19-ita-andamento-nazionale.csv
+	mkdir -p $(dir $@)
+	cat $+ > $@
 	sed -i 's/\r//g' $@
 
 docs/index.html:
@@ -42,5 +42,3 @@ default: \
     public/dati/regioni.csv \
     public/dati/nazione.csv \
     public/dati/province.csv \
-#
-	cp -r public/dati/ docs/
