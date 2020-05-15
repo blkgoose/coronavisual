@@ -27,12 +27,9 @@ docs/dati/nazione.csv: .data/dati-andamento-nazionale/dpc-covid19-ita-andamento-
 	$(call generate, 1, 11, 10, 2)
 
 docs/index.html:
-	rm -rf docs
-	mkdir -p docs
-	cd src
 	npm run-script build
-	mv build/* docs
-	rmdir build
+	rsync build/ docs/ -r
+	rm -rf build
 
 default: \
     clean \
