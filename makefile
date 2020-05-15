@@ -23,11 +23,6 @@ endef
 docs/dati/regioni.csv: .data/dati-regioni/dpc-covid19-ita-regioni.csv
 	$(call generate, 1, 15, 14, 4)
 
-docs/dati/province.csv: .data/dati-province/dpc-covid19-ita-province.csv
-	mkdir -p $(dir $@)
-	cat $+ > $@
-	sed -i 's/\r//g' $@
-
 docs/dati/nazione.csv: .data/dati-andamento-nazionale/dpc-covid19-ita-andamento-nazionale.csv
 	$(call generate, 1, 11, 10, 2)
 
@@ -43,4 +38,3 @@ default: \
     clean \
     docs/dati/regioni.csv \
     docs/dati/nazione.csv \
-    docs/dati/province.csv \
