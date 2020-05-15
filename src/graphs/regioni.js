@@ -56,7 +56,7 @@ class Graph extends Component {
 
         <LineChart
           width={this.props.width - 30}
-          height={500}
+          height={this.props.width / 2}
           data={this.data(this.state.regione)}
         >
           <XAxis dataKey="data"/>

@@ -32,7 +32,7 @@ class Graph extends Component {
   render = () =>
       <LineChart
         width={this.props.width - 30}
-        height={500}
+        height={this.props.width / 2}
         data={this.data()}
       >
         <XAxis dataKey="data"/>
