@@ -24,7 +24,10 @@ const App = () => {
 
   return (
     <>
+      <h1>Regioni</h1>
       <Regioni width={w}/>
+
+      <h1>Nazione</h1>
       <Nazione width={w} />
     </>
   )
