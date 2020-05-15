@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { LineChart, XAxis, YAxis, Legend, Tooltip, CartesianGrid, Line } from 'recharts'
 import Papa from 'papaparse'
 
-const distinct = (v) => Array.from(new Set(v))
-
 class Graph extends Component {
   constructor(props) {
     super(props)
