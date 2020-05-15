@@ -43,12 +43,11 @@ class Graph extends Component {
         <Legend />
         <Tooltip/>
 
-        <Line type="monotone" dataKey="nuovi_risolti" stroke="#8884d8" strokeWidth={2}/>
-        <Line type="monotone" dataKey="nuovi_positivi" stroke="#82ca9d" strokeWidth={2}/>
+        <Line type="monotone" dataKey="totale_positivi" stroke="#ff84d8" strokeWidth={2}/>
       </LineChart>
 }
 
-const Nazione = (props) =>
+const NazioneAttivi = (props) =>
   <Graph width={props.width}/>
 
-export default Nazione
+export default NazioneAttivi

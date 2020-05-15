@@ -2,6 +2,7 @@ import React, { useState, useLayoutEffect } from 'react'
 
 import Regioni from './graphs/regioni'
 import Nazione from './graphs/nazione'
+import NazioneAttivi from './graphs/nazione-attivi'
 
 const useWindowSize = () => {
   const [size, setSize] = useState([0, 0]);
@@ -27,8 +28,11 @@ const App = () => {
       <h1>Regioni</h1>
       <Regioni width={w}/>
 
-      <h1>Nazione</h1>
+      <h1>Nazione delta</h1>
       <Nazione width={w} />
+
+      <h1>Nazione attivi</h1>
+      <NazioneAttivi width={w} />
     </>
   )
 }
