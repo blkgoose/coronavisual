@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { LineChart, XAxis, YAxis, Legend, Tooltip, CartesianGrid, Line } from 'recharts'
 import Papa from 'papaparse'
-import Select from 'react-select'
 
 const distinct = (v) => Array.from(new Set(v))
 
