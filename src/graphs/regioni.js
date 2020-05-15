@@ -55,10 +55,9 @@ class Graph extends Component {
         />
 
         <LineChart
-          width={1000}
+          width={this.props.width - 30}
           height={500}
           data={this.data(this.state.regione)}
-          margin={{top: 5, right: 30, left: 20, bottom: 5}}
         >
           <XAxis dataKey="data"/>
           <YAxis type='number' domain={[0, dataMax => dataMax * 8]}/>
@@ -74,7 +73,7 @@ class Graph extends Component {
       </>
 }
 
-const Regioni = () =>
-  <Graph />
+const Regioni = (props) =>
+  <Graph width={props.width}/>
 
 export default Regioni
