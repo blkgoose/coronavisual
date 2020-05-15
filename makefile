@@ -24,7 +24,7 @@ docs/dati/province.csv: .data/dati-province/dpc-covid19-ita-province.csv
 	cat $+ > $@
 	sed -i 's/\r//g' $@
 
-public/dati/nazione.csv: .data/dati-andamento-nazionale/dpc-covid19-ita-andamento-nazionale.csv
+docs/dati/nazione.csv: .data/dati-andamento-nazionale/dpc-covid19-ita-andamento-nazionale.csv
 	mkdir -p $(dir $@)
 	cat $+ > $@
 	sed -i 's/\r//g' $@
@@ -39,6 +39,6 @@ docs/index.html:
 
 default: \
     clean \
-    public/dati/regioni.csv \
-    public/dati/nazione.csv \
-    public/dati/province.csv \
+    docs/dati/regioni.csv \
+    docs/dati/nazione.csv \
+    docs/dati/province.csv \
