@@ -25,11 +25,16 @@ const App = () => {
 
   return (
     <>
+      <h1><b>Coronavisual</b></h1>
+      <hr/>
+
       <h1>Regioni</h1>
       <Regioni width={w}/>
+      <hr/>
 
       <h1>Nazione delta</h1>
       <Nazione width={w} />
+      <hr/>
 
       <h1>Nazione attivi</h1>
       <NazioneAttivi width={w} />
