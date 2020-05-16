@@ -60,10 +60,20 @@ const App = () => {
     return d.toISOString().split('T')[0]
   }
 
+  const useSoluzione = () => {
+    const data = useData('dati/nazione.csv')
+
+    const today = data.filter(x => x.data === timeSpan(0))[0]
+
+    return today ? today.totale_positivi/today.totale_casi*100 : 0
+  }
+
   return (
     <>
       <h1><b>Coronavisual</b></h1>
       <hr/>
+
+      <h3>Soluzione: {useSoluzione().toFixed(2)}%</h3>
 
       <div>
         <Slider
