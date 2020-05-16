@@ -27,9 +27,12 @@ docs/dati/nazione.csv: .data/dati-andamento-nazionale/dpc-covid19-ita-andamento-
 	$(call generate, 1, 11, 10, 2)
 
 docs/index.html:
+	find docs/ -mindepth 1 -not -path "docs/dati" -exec rm -rf {} \;
 	npm run-script build
 	rsync build/ docs/ -r
 	rm -rf build
+	git add docs/
+	git commit -m "chore(build): $(shell date)"
 
 default: \
     clean \
