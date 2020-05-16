@@ -85,34 +85,6 @@ const App = () => {
         <h4>Dati: ultimi {dayspan} giorni</h4>
       </div>
 
-      <h3>Italia: regioni</h3>
-      <Select
-        options={
-          unique(
-            useData('dati/regioni.csv')
-            .map(x => x.denominazione_regione)
-          )
-          .map(x => { return { value: x, label: x }})
-        }
-        onChange={s => setRegione(s.value)}
-        value={{label: regione, value: regione}}
-      />
-      <Graph
-        width={w}
-        height={w/2}
-        data={
-          useData('dati/regioni.csv')
-          .filter(x => x.data >= timeSpan(dayspan))
-          .filter(x => x.denominazione_regione === regione)
-        }
-        xField="data"
-        lines={
-          [
-            {field: "nuovi_risolti",  color: "#8884d8", strokeWidth: 2, type: "monotone"},
-            {field: "nuovi_positivi", color: "#82ca9d", strokeWidth: 2, type: "monotone"},
-          ]
-        }
-      />
 
       <h3>Italia: delta</h3>
       <Graph
@@ -146,6 +118,36 @@ const App = () => {
           ]
         }
       />
+
+      <h3>Italia: regioni</h3>
+      <Select
+        options={
+          unique(
+            useData('dati/regioni.csv')
+            .map(x => x.denominazione_regione)
+          )
+          .map(x => { return { value: x, label: x }})
+        }
+        onChange={s => setRegione(s.value)}
+        value={{label: regione, value: regione}}
+      />
+      <Graph
+        width={w}
+        height={w/2}
+        data={
+          useData('dati/regioni.csv')
+          .filter(x => x.data >= timeSpan(dayspan))
+          .filter(x => x.denominazione_regione === regione)
+        }
+        xField="data"
+        lines={
+          [
+            {field: "nuovi_risolti",  color: "#8884d8", strokeWidth: 2, type: "monotone"},
+            {field: "nuovi_positivi", color: "#82ca9d", strokeWidth: 2, type: "monotone"},
+          ]
+        }
+      />
+
     </>
   )
 }
