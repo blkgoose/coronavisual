@@ -27,7 +27,7 @@ docs/dati/nazione.csv: .data/dati-andamento-nazionale/dpc-covid19-ita-andamento-
 	$(call generate, 1, 11, 10, 2)
 
 docs/index.html:
-	find docs/ -mindepth 1 -not -path "docs/dati" -exec rm -rf {} \;
+	find docs/ -mindepth 1 \( -path "docs/dati" -o -path "docs/dati/*" \) -prune -o -exec rm -rf {} \;
 	npm run-script build
 	rsync build/ docs/ -r
 	rm -rf build
