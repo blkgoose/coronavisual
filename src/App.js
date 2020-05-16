@@ -74,6 +74,7 @@ const App = () => {
       <hr/>
 
       <h3>Soluzione: {useSoluzione().toFixed(2)}%</h3>
+      <hr/>
 
       <div>
         <Slider
