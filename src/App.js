@@ -63,9 +63,10 @@ const App = () => {
   const useSoluzione = () => {
     const data = useData('dati/nazione.csv')
 
-    const today = data.filter(x => x.data === timeSpan(0))[0]
+    const maxDate = data.map(x => x["data"]).sort().reverse()[0]
+    const lastVal = data.filter(x => x.data === maxDate)[0]
 
-    return today ? (1-today.totale_positivi/today.totale_casi)*100 : 0
+    return lastVal ? (1-lastVal.totale_positivi/lastVal.totale_casi)*100 : 0
   }
 
   return (
