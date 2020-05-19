@@ -65,7 +65,7 @@ const App = () => {
 
     const today = data.filter(x => x.data === timeSpan(0))[0]
 
-    return today ? today.totale_positivi/today.totale_casi*100 : 0
+    return today ? (1-today.totale_positivi/today.totale_casi)*100 : 0
   }
 
   return (
