@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from 'react'
 import unique from 'array-unique'
 
-import Graph from './Graph'
+import LineGraph from './LineGraph'
 import Papa from 'papaparse'
 import Slider from 'rc-slider'
 import Select from 'react-select'
@@ -89,7 +89,7 @@ const App = () => {
 
 
       <h3>Italia: delta</h3>
-      <Graph
+      <LineGraph
         width={w}
         height={w/2}
         data={
@@ -106,7 +106,7 @@ const App = () => {
       />
 
       <h3>Italia: attivi</h3>
-      <Graph
+      <LineGraph
         width={w}
         height={w/2}
         data={
@@ -133,7 +133,7 @@ const App = () => {
         onChange={s => setRegione(s.value)}
         value={{label: regione, value: regione}}
       />
-      <Graph
+      <LineGraph
         width={w}
         height={w/2}
         data={

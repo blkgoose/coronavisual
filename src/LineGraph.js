@@ -1,7 +1,7 @@
 import React from 'react'
 import { LineChart, XAxis, YAxis, Legend, Tooltip, CartesianGrid, Line } from 'recharts'
 
-const Graph = (props) => {
+const LineGraph = (props) => {
   const max = () => {
     const data = props.data
     const fields = props.lines.map(x => x.field)
@@ -31,4 +31,4 @@ const Graph = (props) => {
   )
 }
 
-export default Graph
+export default LineGraph
