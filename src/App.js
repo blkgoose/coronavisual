@@ -104,6 +104,7 @@ const App = () => {
         data={
           useLastData('dati/regioni.csv')
           .map(r => { return { name: r.denominazione_regione, value: parseInt(r.nuovi_positivi) }})
+          .sort((A, B) => B.value - A.value)
         }
       />
 
