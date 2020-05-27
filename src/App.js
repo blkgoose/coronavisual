@@ -3,6 +3,7 @@ import unique from 'array-unique'
 
 import LineGraph from './LineGraph'
 import BarGraph from './BarGraph'
+
 import Papa from 'papaparse'
 import Slider from 'rc-slider'
 import Select from 'react-select'
@@ -47,7 +48,6 @@ const useData = (file) => {
 
   return _data
 }
-
 
 const App = () => {
   const [regione, setRegione] = useState("Lazio")
