@@ -12,7 +12,7 @@ const BarGraph = props =>
     <YAxis />
     <Tooltip />
     <CartesianGrid strokeDasharray="3 3" />
-    <Bar dataKey="value" fill="#82ca9d" background={{ fill: '#eee' }} />
+    <Bar dataKey="value" barSize={5} fill="#82ca9d" background={{ fill: '#eee' }} />
   </BarChart>
 
 export default BarGraph
