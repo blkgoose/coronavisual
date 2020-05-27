@@ -52,7 +52,7 @@ const useData = (file) => {
 const App = () => {
   const [regione, setRegione] = useState("Lazio")
   const [dayspan, setDayspan] = useState(30)
-  const [screenWidth, screenHeight] = useWindowSize()
+  const screenWidth = useWindowSize()[0]
   const w = screenWidth - 30
 
   const timeSpan = (ndays) => {
