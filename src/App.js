@@ -2,6 +2,7 @@ import React, { useState, useLayoutEffect } from 'react'
 import unique from 'array-unique'
 
 import LineGraph from './LineGraph'
+import BarGraph from './BarGraph'
 import Papa from 'papaparse'
 import Slider from 'rc-slider'
 import Select from 'react-select'
@@ -69,6 +70,15 @@ const App = () => {
     return lastVal ? (1-lastVal.totale_positivi/lastVal.totale_casi)*100 : 0
   }
 
+  const useLastData = (file) => {
+    const data = useData(file)
+
+    const maxDate = data.map(x => x["data"]).sort().reverse()[0]
+    const lastVal = data.filter(x => x.data === maxDate)
+
+    return lastVal ? lastVal : []
+  }
+
   return (
     <>
       <h1><b>Coronavisual</b></h1>
@@ -86,6 +96,16 @@ const App = () => {
         />
         <h4>Dati: ultimi {dayspan} giorni</h4>
       </div>
+
+      <h3>Italia: distribuzione nuovi casi ad oggi</h3>
+      <BarGraph
+        width={w}
+        height={w/2}
+        data={
+          useLastData('dati/regioni.csv')
+          .map(r => { return { name: r.denominazione_regione, value: parseInt(r.nuovi_positivi) }})
+        }
+      />
 
 
       <h3>Italia: delta</h3>
