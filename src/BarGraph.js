@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts'
+import React from 'react'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 const BarGraph = props =>
   <BarChart
