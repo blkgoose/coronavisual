@@ -79,6 +79,48 @@ const App = () => {
     return lastVal ? lastVal : []
   }
 
+  const usePrediction = (file, dayspan) => {
+    const data =
+      useData(file)
+        .filter(x => x.data >= timeSpan(dayspan))
+        .sort((a, b) => b.data > a.data ? -1 : 1)
+        .map((x, i, arr) => {
+          x["previsione_positivi"]=(i == arr.length-1 ? x.totale_positivi : null)
+          return x
+        })
+
+    const c =
+      data
+        .map(x => x.totale_positivi)
+        .reduce((a, b, i, arr) => ((a*i)+(b-arr[i-1]))/(i+1) || 0, 0)
+
+    const lastDate =
+      data[data.length-1] ? new Date(data[data.length-1].data) : new Date()
+
+    const lastVal =
+      data[data.length-1] ? data[data.length-1].totale_positivi : 0
+
+    const addDays = (date, ndays) => {
+      const d = new Date(date)
+
+      d.setDate(date.getDate() + ndays)
+
+      return d
+    }
+
+    Array.from(Array(30).keys())
+      .map(x => x+1)
+      .forEach(i => {
+        data.push({
+          data: addDays(lastDate, i).toISOString().split('T')[0],
+          previsione_positivi: Math.max(parseInt(lastVal)+(c*(i)), 0).toFixed(0),
+          totale_positivi: i == 0 ? Math.max(parseInt(lastVal)+(c*(i)), 0).toFixed(0) : null
+        })
+      })
+
+    return data
+  }
+
   return (
     <>
       <h1><b>Coronavisual</b></h1>
@@ -96,6 +138,23 @@ const App = () => {
         />
         <h4>Dati: ultimi {dayspan} giorni</h4>
       </div>
+
+      <h3>Italia: previsioni attivi prossimo mese</h3>
+      <LineGraph
+        width={w}
+        height={w/2}
+        data={
+          usePrediction('dati/nazione.csv', dayspan)
+        }
+        xField="data"
+        lines={
+          [
+            {field: "totale_positivi", color: "#ff84d8", strokeWidth: 2, type: "monotone"},
+            {field: "previsione_positivi", color: "#1184d8", strokeWidth: 2, type: "monotone"},
+          ]
+        }
+      />
+
 
       <h3>Italia: distribuzione nuovi casi ad oggi</h3>
       <BarGraph
