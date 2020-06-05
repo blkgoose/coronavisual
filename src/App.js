@@ -124,6 +124,7 @@ const App = () => {
   return (
     <>
       <h1><b>Coronavisual</b></h1>
+      <h6><i>Ultimo aggiornamento: </i>{useLastData('dati/nazione.csv').map(x => x.data)}</h6>
       <hr/>
 
       <h3>Soluzione: {useSoluzione().toFixed(2)}%</h3>
