@@ -85,7 +85,7 @@ const App = () => {
         .filter(x => x.data >= timeSpan(dayspan))
         .sort((a, b) => b.data > a.data ? -1 : 1)
         .map((x, i, arr) => {
-          x["previsione_positivi"]=(i == arr.length-1 ? x.totale_positivi : null)
+          x["previsione_positivi"]=(i === arr.length-1 ? x.totale_positivi : null)
           return x
         })
 
@@ -114,7 +114,7 @@ const App = () => {
         data.push({
           data: addDays(lastDate, i).toISOString().split('T')[0],
           previsione_positivi: Math.max(parseInt(lastVal)+(c*(i)), 0).toFixed(0),
-          totale_positivi: i == 0 ? Math.max(parseInt(lastVal)+(c*(i)), 0).toFixed(0) : null
+          totale_positivi: i === 0 ? Math.max(parseInt(lastVal)+(c*(i)), 0).toFixed(0) : null
         })
       })
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Area, ComposedChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList } from 'recharts'
+import { Area, ComposedChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 const BarGraph = props => {
   const totalVal =
