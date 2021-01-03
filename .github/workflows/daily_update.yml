@@ -26,6 +26,9 @@ jobs:
         git config --local user.name "GitHub Action"
         git commit -m "chore(update): $TIME" -a || true
 
+    - name: Sync repo
+      run: git pull --ff-only
+
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
